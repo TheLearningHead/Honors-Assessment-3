@@ -18,9 +18,15 @@ export default function App() {
     try {
       const response = await axios.get(`https://api.nasa.gov/neo/rest/v1/neo/${asteroidID}?api_key=${NASA_API_KEY}`);
       setAsteroidData(response.data);
-    } catch (error) {
-      console.error('Error fetching asteroid data:', error);
-      alert('Asteroid not found. Please enter a valid ID.');
+    } catch (error: any) {
+      if (error.response && error.response.status === 404) {
+        // Handle 404 error specifically
+        alert('Asteroid not found. Please enter a valid ID.');
+      } else {
+        // Handle other errors
+        console.error('Error fetching asteroid data:', error);
+        alert('An error occurred while fetching asteroid data. Please try again later.');
+      }
     } finally {
       setLoading(false);
     }
