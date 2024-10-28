@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, ActivityIndicator } from 'react-native';
 import axios from 'axios';
+import Constants from 'expo-constants';
 
-const NASA_API_KEY = 'FjlNPm2oMlUVo21oWPEUsbvekn6lXAW4FQKtvZhv'; // Replace with your NASA API key
+const NASA_API_KEY = Constants.expoConfig?.extra?.NASA_API_KEY;
 
 export default function App() {
   const [asteroidID, setAsteroidID] = useState('');
